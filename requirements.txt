@@ -1,0 +1,3 @@
+tkintertable
+customtkinter
+psycopg
