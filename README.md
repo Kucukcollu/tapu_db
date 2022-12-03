@@ -1,5 +1,5 @@
-# tapu_müd_bil_sis
-Tapu Müdürlüğü Bilgi Sistemi
+# tapu_db
+Veritabanı projesi: Tapu Müdürlüğü Bilgi Sistemi
 
 ### Filesystem
 ```bash
