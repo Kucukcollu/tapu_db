@@ -1,6 +1,11 @@
 # tapu_db
 Veritabanı projesi: Tapu Müdürlüğü Bilgi Sistemi
 
+### Figures
+![panel](figures/panel.png)
+![home](figures/home.png)
+![result](figures/result.png)
+
 ### Filesystem
 ```bash
 ├── README.md                      
