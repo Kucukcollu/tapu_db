@@ -41,16 +41,17 @@ INSERT INTO seller VALUES ('Emilia','Clarke',23432166,'Apartment',19283422,54000
 
 ------------------------------------------------------------------------------------------------------------------
 -- datas of buyyer table
-INSERT INTO buyyer VALUES ('Jennifer','Lawrence',15245436,'Apartment',223334444,12000000);
-INSERT INTO buyyer VALUES ('Jennifer','Lawrence',15245436,'Apartment',223334444,12000000);
-INSERT INTO buyyer VALUES ('Jennifer','Lawrence',15245436,'Apartment',223334444,12000000);
-INSERT INTO buyyer VALUES ('Jennifer','Lawrence',15245436,'Apartment',223334444,12000000);
-INSERT INTO buyyer VALUES ('Jennifer','Lawrence',15245436,'Apartment',223334444,12000000);
-INSERT INTO buyyer VALUES ('Jennifer','Lawrence',15245436,'Apartment',223334444,12000000);
-INSERT INTO buyyer VALUES ('Jennifer','Lawrence',15245436,'Apartment',223334444,12000000);
-INSERT INTO buyyer VALUES ('Jennifer','Lawrence',15245436,'Apartment',223334444,12000000);
-INSERT INTO buyyer VALUES ('Jennifer','Lawrence',15245436,'Apartment',223334444,12000000);
-INSERT INTO buyyer VALUES ('Jennifer','Lawrence',15245436,'Apartment',223334444,12000000);
+--                        (bName, bSurname, bID, pType, pOwnerID, bBudget)
+INSERT INTO buyyer VALUES ('Leonhard','Euler',24939461,'Apartment',18034035,12000000);
+INSERT INTO buyyer VALUES ('Marie','Curie',02184646,'Office',22054045,200000);
+INSERT INTO buyyer VALUES ('Nikola','Tesla',98327676,'Storehouse',12054042,450000);
+INSERT INTO buyyer VALUES ('Linus','Torvalds',16243215,'Storehouse',42054545,3200);
+INSERT INTO buyyer VALUES ('Ada','Lovelace',67435643,'Office',25089404,0);
+INSERT INTO buyyer VALUES ('Alan','Turing',98765423,'Storehouse',14254054,2000);
+INSERT INTO buyyer VALUES ('Bjarne','Stroustrup',6785643,'Apartment',09983462,5000000);
+INSERT INTO buyyer VALUES ('Richard','Stallman',23421621,'Office',86654042,110000);
+INSERT INTO buyyer VALUES ('Dennis','Ritchie',98656774,'Storehouse',12872350,650430);
+INSERT INTO buyyer VALUES ('William','Shockley',31093290,'Apartment',19283422,4630000);
 ------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------
