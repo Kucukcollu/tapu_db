@@ -7,14 +7,14 @@ CREATE TABLE property (
 	pType    			varchar(15) not null, 
 	pOwnerName    	    varchar(20) not null,
 	pOwnerSurname       varchar(20) not null,
-	pOwnerID			int not null primary key,
+	pOwnerID			int not null,
 	pPrice	            int not null,
 	pRoomNumber	        int,
 	pSurvey	            int not null,
 	pAddress            varchar(40) not null,
-	pEstateID           int not null
+	pEstateID           int not null,
+	primary key(pOwnerID, pEstateID)
 );
-
 -------------------------------------------------------
 
 -- DROP TABLE seller;
@@ -27,7 +27,6 @@ CREATE TABLE seller(
 	sBudget				int not null,
 	primary key(sID, pOwnerID)
 );
-
 -------------------------------------------------------
 
 -- DROP TABLE buyyer;
@@ -40,7 +39,6 @@ CREATE TABLE buyyer(
 	bBudget				int not null,
 	primary key(bID, pOwnerID)
 );
-
 -------------------------------------------------------
 
 -- DROP TABLE sales;
@@ -51,8 +49,6 @@ CREATE TABLE sales(
 	pPrice	            int not null,
 	sComission			int not null,
 	sCirCap 			int not null,			
-	sIsDonation	        boolean not null,
-	primary key(bID,sID)
+	sIsDonation	        boolean not null
 );
-
 -------------------------------------------------------
