@@ -5,10 +5,10 @@
 -- DROP TABLE property;
 CREATE TABLE property (
 	pType    			varchar(15) not null, 
-    pOwnerName    	    varchar(20) not null,
-    pOwnerSurname       varchar(20) not null,
-    pOwnerID			int not null primary key,
-    pPrice	            int not null,
+	pOwnerName    	    varchar(20) not null,
+	pOwnerSurname       varchar(20) not null,
+	pOwnerID			int not null primary key,
+	pPrice	            int not null,
 	pRoomNumber	        int,
 	pSurvey	            int not null,
 	pAddress            varchar(40) not null,
@@ -19,9 +19,9 @@ CREATE TABLE property (
 
 -- DROP TABLE seller;
 CREATE TABLE seller(
-    sName    	    	varchar(20) not null,
-    sSurname       		varchar(20) not null,
-    sID					int not null,
+	sName    	    	varchar(20) not null,
+	sSurname       		varchar(20) not null,
+	sID					int not null,
 	pType    			varchar(15) not null, 
 	pOwnerID			int not null,
 	sBudget				int not null,
@@ -32,9 +32,9 @@ CREATE TABLE seller(
 
 -- DROP TABLE buyyer;
 CREATE TABLE buyyer(
-    bName    	    	varchar(20) not null,
-    bSurname       		varchar(20) not null,
-    bID					int not null,
+	bName    	    	varchar(20) not null,
+	bSurname       		varchar(20) not null,
+	bID					int not null,
 	pType    			varchar(15) not null, 
 	pOwnerID			int not null,
 	bBudget				int not null,
