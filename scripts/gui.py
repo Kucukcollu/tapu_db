@@ -187,22 +187,62 @@ def update_handle():
 
 	update_frame.tkraise()
 
+	update_type = customtkinter.StringVar()
 	update_input = customtkinter.StringVar()
+	update_id_input = customtkinter.StringVar()
 
 	update_label = customtkinter.CTkLabel(master=update_frame, text="Mulk tablosu update", text_font=("Roboto", 28),text_color="Orange")
 	update_label.pack(pady=12, padx=10)
 
-	update_option_menu = customtkinter.CTkOptionMenu(master=update_frame, values=["pType","pOwnerName","pOwnerSurname","pOwnerID,pPrice","pRoomNumber","pSurvey","pAddress","pEstateID"], command=lambda:option_handler())
+	update_option_menu = customtkinter.CTkOptionMenu(master=update_frame, values=["pOwnerName","pOwnerSurname","pOwnerID","pPrice"],variable=update_type)
 	update_option_menu.pack(pady=12, padx=10)
 
 	update_entry = customtkinter.CTkEntry(master=update_frame, placeholder_text="Update entry", textvariable=update_input, width=200)
 	update_entry.pack(pady=12, padx=10)
 
-	back_button = customtkinter.CTkButton(master=update_frame, text="Geri don", command=lambda:load_home())
+	id_entry = customtkinter.CTkEntry(master=update_frame, placeholder_text="pStateID entry", textvariable=update_id_input, width=200)
+	id_entry.pack(pady=12, padx=10)
+
+	update_button = customtkinter.CTkButton(master=update_frame, text="Güncelle", command=lambda:update_button_handler(update_type,update_input,update_id_input))
+	update_button.pack(pady=12, padx=10)
+
+	back_button = customtkinter.CTkButton(master=update_frame, text="Geri dön", command=lambda:load_home())
 	back_button.pack(pady=12, padx=10)
 
-def option_handler():
-	pass
+def update_button_handler(update_type,update_input,update_id_input):
+	try:
+		input1= str(update_type.get())
+		input2 = str(update_input.get())
+		input3 = str(update_id_input.get())
+
+		db_connection = psycopg.connect(dbname="tapu_db", user="postgres", host="localhost", password="15246868")
+		cur = db_connection.cursor()
+
+		if input1 == "pOwnerName":
+			query = """UPDATE property SET pOwnerName=%s where pEstateID=%s"""
+		elif input1 == "pOwnerSurname":
+			query = """UPDATE property SET pOwnerSurname=%s where pEstateID=%s"""
+		elif input1 == "pOwnerID":
+			query = """UPDATE property SET pOwnerID=%s where pEstateID=%s"""
+		elif input1 == "pPrice":
+			query = """UPDATE property SET pPrice=%s where pEstateID=%s"""
+		else:
+			print("error")
+
+		query_values = (input2,input3)
+
+		cur.execute(query,query_values)
+		db_connection.commit()
+		query_result = cur.fetchone()
+
+		cur.close()
+	except:
+		print("Cannot execute query!")
+	finally:
+		if db_connection is not None:
+			db_connection.close()
+			print("Connection closed!")
+
 
 def delete_handle():
 	clear_widgets(home)
