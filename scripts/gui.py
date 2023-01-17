@@ -32,6 +32,9 @@ update_frame.grid(row=0, column=0, sticky='news')
 delete_frame = customtkinter.CTkFrame(master=app, width=frame_size_width, height=frame_size_height)
 delete_frame.grid(row=0, column=0, sticky='news')
 
+view_frame = customtkinter.CTkFrame(master=app, width=frame_size_width, height=frame_size_height)
+view_frame.grid(row=0, column=0, sticky='news')
+
 def clear_widgets(frame):
 	for widget in frame.winfo_children():
 		widget.destroy()
@@ -95,8 +98,11 @@ def load_home():
 	delete_button = customtkinter.CTkButton(master=home, text="Veri silme", command=lambda:delete_handle())
 	delete_button.pack(pady=12, padx=10)
 
-	listeleme_button = customtkinter.CTkButton(master=home, text="List buyyers and sellers", command=lambda:list_handle())
+	listeleme_button = customtkinter.CTkButton(master=home, text="List unique buyyers and sellers", command=lambda:list_handle())
 	listeleme_button.pack(pady=12, padx=10)
+
+	view_button = customtkinter.CTkButton(master=home, text="Show prices", command=lambda:view_handle())
+	view_button.pack(pady=12, padx=10)
 
 def insert_handle():
 	clear_widgets(home)
@@ -317,30 +323,74 @@ def list_handle():
 			db_connection.close()
 			print("Connection closed!")
 
-# def connect_database(query_input):
-# 	try:
-# 		q = (query_input.get())
-# 		q = str(q)
-# 		db_connection = psycopg.connect(dbname="tapu_db", user="postgres", host="localhost", password="15246868")
-# 		cur = db_connection.cursor()
-# 		cur.execute(q)
-# 		query_result = cur.fetchone()
+def view_handle():
+	clear_widgets(home)
+	clear_widgets(insert_frame)
+	clear_widgets(update_frame)
+	clear_widgets(delete_frame)
+	clear_widgets(view_frame)
 
-# 		print(query_result)
+	view_frame.tkraise()
 
-# 		res = tuple_parser(query_result)
-# 		print(res)
+	city = customtkinter.StringVar()
 
-# 		res_label = customtkinter.CTkLabel(master=home, text=res, text_font=("Roboto", 14), text_color="white")
-# 		res_label.pack(pady=12, padx=10)
+	city_label = customtkinter.CTkLabel(master=view_frame, text="Lokasyon seciniz", text_font=("Roboto", 28),text_color="Orange")
+	city_label.pack(pady=12, padx=10)
 
-# 		cur.close()
-# 	except:
-# 		print("Cannot execute query!")
-# 	finally:
-# 		if db_connection is not None:
-# 			db_connection.close()
-# 			print("Connection closed!")
+	city_option_menu = customtkinter.CTkOptionMenu(master=view_frame, values=["Istanbul","Paris","Tokyo","Berlin","London","New York","San Diego","San Francisco","Seatle"],variable=city)
+	city_option_menu.pack(pady=12, padx=10)
+
+	main_insert_button = customtkinter.CTkButton(master=view_frame, text="View", command=lambda:view_button_handler(city))
+	main_insert_button.pack(pady=12, padx=10)
+
+	back_button = customtkinter.CTkButton(master=view_frame, text="Geri don", command=lambda:load_home())
+	back_button.pack(pady=12, padx=10)
+
+def view_button_handler(city):
+	try:
+		request_city = str(city.get())
+
+		db_connection = psycopg.connect(dbname="tapu_db", user="postgres", host="localhost", password="15246868")
+		cur = db_connection.cursor()
+
+		if request_city == "Istanbul":
+			query = """SELECT * FROM istanbul_places_money"""
+		elif request_city == "Paris":
+			query = """SELECT * FROM paris_places_money"""
+		elif request_city == "Tokyo":
+			query = """SELECT * FROM tokyo_places_money"""
+		elif request_city == "Berlin":
+			query = """SELECT * FROM berlin_places_money"""
+		elif request_city == "London":
+			query = """SELECT * FROM london_places_money"""
+		elif request_city == "New York":
+			query = """SELECT * FROM newyork_places_money"""
+		elif request_city == "San Diego":
+			query = """SELECT * FROM san_diago_places_money"""
+		elif request_city == "San Francisco":
+			query = """SELECT * FROM san_francisco_places_money"""
+		elif request_city == "Seatle":
+			query = """SELECT * FROM seatle_places_money"""
+		else:
+			print("error")
+		
+		cur.execute(query)
+		db_connection.commit()
+		query_result = cur.fetchall()
+
+		res = tuple_parser(query_result)
+		print(res)
+
+		res_label = customtkinter.CTkLabel(master=view_frame, text=res, text_font=("Roboto", 12))
+		res_label.pack(pady=12, padx=10)
+
+		cur.close()
+	except:
+		print("Cannot execute query!")
+	finally:
+		if db_connection is not None:
+			db_connection.close()
+			print("Connection closed!")
 
 def main():
 	load_panel()
