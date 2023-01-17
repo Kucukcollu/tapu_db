@@ -2,20 +2,28 @@
 Veritabanı projesi: Tapu Müdürlüğü Bilgi Sistemi
 
 ### Figures
-![panel](figures/panel.png)
-![home](figures/home.png)
-![result](figures/result.png)
+![giris](figures/giris.png)
+![options](figures/options.png)
+![ornek_sorgu](figures/ornek_sorgu.png)
+![ornek_sorgu_2](figures/ornek_sorgu_2.png)
 
 ### Filesystem
 ```bash
-├── README.md                      
-├── database                    
-│   ├── tapu_db_data.sql            # basic queries to test datas
-│   ├── tapu_db_queries.sql         # inserts datas to the created tables
-│   └── tapu_db_schema.sql          # creates 4 table
+├── LICENSE
+├── README.md
+├── database
+│   ├── tapu_db_data.sql
+│   ├── tapu_db_queries.sql
+│   └── tapu_db_schema.sql
+├── figures
+│   ├── giris.png
+│   ├── options.png
+│   ├── ornek_sorgu.png
+│   └── ornek_sorgu_2.png
+├── project.pdf
+├── requirements.txt
 └── scripts
-    ├── database.py                 # database api script to comm with database
-    └── gui.py                      # modern gui to queries and results
+    └── gui.py
 ```
 
 ### Installation
@@ -41,14 +49,8 @@ Run prepared sql files in tapu_db with specific order as following;
 And now, it is time to run example queries.
 Run tapu_db_queries.sql step by step to see the datas.
 
-##### Step-4: Query with Pyhon API
+##### Step-4
 Change PostgreSQL password according to your system.
-
-```bash
-python3 database.py
-```
-
-##### Step-5: GUI
 
 ```bash
 python3 gui.py
