@@ -47,6 +47,12 @@ def check_results(a,b,c):
 		label = customtkinter.CTkLabel(master=panel, text="Database Name or Username or Password is wrong!", text_font=("Roboto", 24),text_color="Red")
 		label.pack(pady=12, padx=10)
 
+def tuple_parser(tuple):
+    word = ""
+    for item in tuple:
+        word = word + str(item) + "\n"
+    return word
+
 def load_panel():
 
 	panel.tkraise()
@@ -88,6 +94,9 @@ def load_home():
 
 	delete_button = customtkinter.CTkButton(master=home, text="Veri silme", command=lambda:delete_handle())
 	delete_button.pack(pady=12, padx=10)
+
+	listeleme_button = customtkinter.CTkButton(master=home, text="List buyyers and sellers", command=lambda:list_handle())
+	listeleme_button.pack(pady=12, padx=10)
 
 def insert_handle():
 	clear_widgets(home)
@@ -243,7 +252,6 @@ def update_button_handler(update_type,update_input,update_id_input):
 			db_connection.close()
 			print("Connection closed!")
 
-
 def delete_handle():
 	clear_widgets(home)
 	clear_widgets(insert_frame)
@@ -284,11 +292,30 @@ def delete_db(del_id):
 			db_connection.close()
 			print("Connection closed!")
 
-# def tuple_parser(tuple):
-#     word = ""
-#     for item in tuple:
-#         word = word + str(item) + "\n"
-#     return word
+def list_handle():
+	try:
+		db_connection = psycopg.connect(dbname="tapu_db", user="postgres", host="localhost", password="15246868")
+		cur = db_connection.cursor()
+
+		query = """SELECT bname FROM  buyyer UNION SELECT sname FROM seller"""
+
+		cur.execute(query)
+		db_connection.commit()
+		query_result = cur.fetchall()
+		
+		res = tuple_parser(query_result)
+		print(res)
+
+		res_label = customtkinter.CTkLabel(master=home, text=res, text_font=("Roboto", 12))
+		res_label.pack(pady=12, padx=10)
+
+		cur.close()
+	except:
+		print("Cannot execute query!")
+	finally:
+		if db_connection is not None:
+			db_connection.close()
+			print("Connection closed!")
 
 # def connect_database(query_input):
 # 	try:
